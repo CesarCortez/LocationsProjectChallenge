@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LocationList from "./components/LocationList";
 import LocationModal from "./components/LocationModal";
+import AddLocation from "./components/AddLocation";
 import { Location } from "./types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -16,6 +17,12 @@ const App: React.FC = () => {
     setShowModal(true);
   };
 
+  const handleAdd = (location: Location) => {
+    setRefresh(false);
+    setModalLocation(location);
+    setShowModal(true);
+  };
+
   const handleCloseModal = () => {
     setModalLocation(null);
     setShowModal(false);
@@ -24,6 +31,7 @@ const App: React.FC = () => {
 
   return (
     <Container className="mt-5">
+      <AddLocation onAdd={handleAdd} />
       <LocationList onView={handleView} refreshLocations={refreshLocations} />
       {showModal && (
         <LocationModal location={modalLocation!} onClose={handleCloseModal} />
