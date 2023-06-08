@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Location } from "../types";
-import { getLocations } from "../services/apiService";
+import { getLocations, deleteLocation } from "../services/apiService";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import { Row, Col } from "react-bootstrap";
 
+interface LocationListProps {
+  onView: (location: Location) => void;
+  refreshLocations: boolean;
+}
 
-const LocationList: React.FC = () => {
+const LocationList: React.FC<LocationListProps> = ({
+  onView,
+  refreshLocations,
+}) => {
   const [locations, setLocations] = useState<Location[]>([]);
 
   useEffect(() => {
     loadLocations();
-  }, []);
+  }, [refreshLocations]);
 
   const loadLocations = async () => {
     try {
@@ -23,7 +30,14 @@ const LocationList: React.FC = () => {
   };
 
   const handleDelete = async (id: string) => {
-    //add logic to delete location
+    if (window.confirm("Are you sure you want to delete this location?")) {
+      try {
+        await deleteLocation(id);
+        loadLocations();
+      } catch (error) {
+        console.error("Error while deleting location:", error);
+      }
+    }
   };
 
   return (
@@ -50,6 +64,7 @@ const LocationList: React.FC = () => {
                     <Button
                       className="btn-block"
                       variant="info"
+                      onClick={() => onView(location)}
                     >
                       View
                     </Button>
