@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
 import { Row, Col, Form } from "react-bootstrap";
 import { addLocation } from "../services/apiService";
+import LocationMap from "./GoogleMap";
 
 interface LocationModalProps {
   location: Location;
@@ -92,7 +93,9 @@ const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
                 </tbody>
               </Table>
               <Row>
-                <Col>{/*ADD LOGIC AND COMPONENT FOR MAPS */}</Col>
+                <Col>
+                  <LocationMap location={location}></LocationMap>
+                </Col>
               </Row>
             </Modal.Body>
             <Modal.Footer>
