@@ -78,6 +78,13 @@ When contributing, please follow these guidelines:
 - Commit your changes with descriptive commit messages following best practices.
 - Push your changes to your forked repository.
 - Submit a pull request to the main branch of the original repository.
+
+## Testing
+To run the tests, run the following command:
+
+```bash
+npm run test
+```
 ## License
 This project is licensed under the MIT License.
 

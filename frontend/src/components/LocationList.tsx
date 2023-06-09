@@ -41,7 +41,7 @@ const LocationList: React.FC<LocationListProps> = ({
   };
 
   return (
-    <div>
+    <div data-testid="location-list">
       <h2>List of Locations:</h2>
       <Table responsive striped bordered hover>
         <thead>
@@ -62,6 +62,7 @@ const LocationList: React.FC<LocationListProps> = ({
                 <Row>
                   <Col className="d-grid gap-2">
                     <Button
+                      data-testid={"view-button-" + index}
                       className="btn-block"
                       variant="info"
                       onClick={() => onView(location)}
@@ -71,6 +72,7 @@ const LocationList: React.FC<LocationListProps> = ({
                   </Col>
                   <Col className="d-grid gap-2">
                     <Button
+                      data-testid={"delete-button" + index}
                       variant="danger"
                       onClick={() => handleDelete(location._id)}
                     >

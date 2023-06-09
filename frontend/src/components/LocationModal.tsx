@@ -31,7 +31,7 @@ const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
 
   return (
     <>
-      <Modal show={true} backdrop="static" keyboard={false}>
+      <Modal data-testid="add-location-modal" show={true} backdrop="static" keyboard={false}>
         <Modal.Header>
           <Modal.Title>Location Data</Modal.Title>
         </Modal.Header>
@@ -40,15 +40,17 @@ const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
             <Form onSubmit={handleAdd}>
               <Form.Group>
                 <Modal.Body>
-                  <Form.Label>Name:</Form.Label>
+                  <Form.Label htmlFor="name">Name:</Form.Label>
                   <Form.Control
+                  id="name"
                     placeholder="Enter Name"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
-                  <Form.Label>Address:</Form.Label>
+                  <Form.Label htmlFor="address">Address:</Form.Label>
                   <Form.Control
+                  id="address"
                     placeholder="Enter Address"
                     type="text"
                     value={address}
@@ -58,7 +60,7 @@ const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
                     {(location._id === "" || !location._id) &&
                     name.length > 0 &&
                     address.length > 0 ? (
-                      <Button type="submit" variant="success">
+                      <Button data-testid="save-button" type="submit" variant="success">
                         Save
                       </Button>
                     ) : null}
